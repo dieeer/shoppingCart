@@ -13,11 +13,13 @@ class ShoppingCartTests: XCTestCase {
     var shoppingCart: ShoppingCart!
     
     override func setUp() {
+        super.setUp()
         shoppingCart = ShoppingCart()
     }
     
     override func tearDown() {
         shoppingCart = nil
+        super.tearDown()
     }
     
     private func addMockProducts() {
@@ -27,6 +29,14 @@ class ShoppingCartTests: XCTestCase {
     func testInitSetsUpCartCorrectly() {
             
         XCTAssertTrue(shoppingCart.products.isEmpty)
+    }
+    
+    
+    func testTotalPriceDisplaysCorrectly() {
+        
+        addMockProducts()
+        
+        XCTAssertEqual(shoppingCart.totalPrice(), 1059.95)
     }
     
     
@@ -55,11 +65,5 @@ class ShoppingCartTests: XCTestCase {
         
         XCTAssertEqual(shoppingCart.products.count, 0)
     }
-    
-    func testTotalPriceDisplaysCorrectly() {
-        
-        addMockProducts()
-        
-        XCTAssertEqual(shoppingCart.totalPrice(), 1059.95)
-    }
+
 }

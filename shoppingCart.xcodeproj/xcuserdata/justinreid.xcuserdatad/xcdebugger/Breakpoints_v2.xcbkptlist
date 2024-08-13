@@ -7,16 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "1A53E098-FCA2-4D36-B7F8-A1B373400C43"
+            uuid = "CDFFFC2C-ECCF-4EB0-877A-0CA8C508F63C"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shoppingCartTests/shoppingCartTests.swift"
+            filePath = "shoppingCart/Models/ShoppingCart.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "testTotalPriceDisplaysCorrectly()"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "totalPrice()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
