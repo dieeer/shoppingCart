@@ -5,6 +5,7 @@
 //  Created by Justin Reid on 13/08/2024.
 //
 
+
 enum Category {
     case suspension
     case exhaust
@@ -14,8 +15,14 @@ enum Category {
 
 class Product {
     
-    var category: Category
-    var name: String
-    var SKU: String
-    var price: Decimal
+    let category: Category
+    let name: String
+    let SKU: String
+    let price: Decimal
+}
+
+struct Promotion {
+    let name: String
+    let requiredItems: [Product]
+    let discount: Int
 }

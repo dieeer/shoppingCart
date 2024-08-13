@@ -5,6 +5,14 @@
 //  Created by Justin Reid on 13/08/2024.
 //
 
-class ShoppingCart {
+import Foundation
+
+protocol ShoppingCarting {
+    func add(item: Product)
+    func removeItem()
+}
+
+class ShoppingCart: ShoppingCarting {
     var products: [Product] = []
+    
 }
