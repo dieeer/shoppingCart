@@ -10,33 +10,46 @@ import XCTest
 
 class ShoppingCartTests: XCTestCase {
     
-    var shoppingCart: ShoppingCarting!
+    var shoppingCart: ShoppingCart!
     
     override func setUp() {
-        shoppingCart = ShoppingCart(products: [.mockProduct1, .mockProduct2, .mockProduct3, .mockProduct4, .mockProduct5])
+        shoppingCart = ShoppingCart()
     }
     
     override func tearDown() {
         shoppingCart = nil
     }
     
+    private func addMockProducts() {
+        shoppingCart.products = [.mockProduct1, .mockProduct2, .mockProduct3, .mockProduct4, .mockProduct5]
+    }
+    
+    func testInitSetsUpCartCorrectly() {
+            
+        XCTAssertTrue(shoppingCart.products.isEmpty)
+    }
+    
+    
     func testAddItemAddsItemSuccessfully() {
-        
+                
         shoppingCart.add(item: .mockProduct1)
         
-        XCTAssertEqual(shoppingCart.products.count, 6)
+        XCTAssertEqual(shoppingCart.products.count, 1)
     }
     
     func testRemoveItemRemovesItemSuccessfully() {
         
+        addMockProducts()
+        
         shoppingCart.removeItem(with: "001")
         
-        // Assert: Check that the product is no longer in the cart
-        XCTAssertFalse(shoppingCart.products.contains(where: { $0.id == "001" }), "Product with id '001' should be removed from the cart")
+        XCTAssertFalse(shoppingCart.products.contains(where: { $0.id == "001" }), "id '001' should be removed from the cart")
         XCTAssertEqual(shoppingCart.products.count, 4)
     }
     
-    func testClearCartClearsTheCart() {
+    func testClearCartClearsTheCartSuccessfully() {
+        
+        addMockProducts()
         
         shoppingCart.clearCart()
         

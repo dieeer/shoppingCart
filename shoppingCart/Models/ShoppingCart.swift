@@ -9,19 +9,13 @@ import Foundation
 
 protocol ShoppingCarting {
     var products: [Product] { get set }
-    
-    func add(item: Product)
-    func removeItem(with id: String)
-    func clearCart()
 }
 
 class ShoppingCart: ShoppingCarting {
 
-    var discounter: Discounting?
     var products: [Product] = []
     
-    init(discounter: Discounting? = nil, products: [Product] = []) {
-        self.discounter = discounter
+    init(products: [Product] = []) {
         self.products = products
     }
     

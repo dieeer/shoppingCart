@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+extension Promotion {
+    
+    static let mockPromotion = Promotion(
+        name: "Complete Car Package",
+        requiredItems: [.mockProduct1, .mockProduct2, .mockProduct3],
+        setPrice: 300.00
+    )
+}
