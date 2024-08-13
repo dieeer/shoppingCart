@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "BA42ACAB-ED18-4088-ABC0-ABCB7208854E",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:shoppingCart.xcodeproj",
+      "identifier" : "DC55F5892C6BBD8B00B4C007",
+      "name" : "shoppingCart"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:shoppingCart.xcodeproj",
+        "identifier" : "DC55F59A2C6BBD8D00B4C007",
+        "name" : "shoppingCartTests"
+      }
+    }
+  ],
+  "version" : 1
+}
