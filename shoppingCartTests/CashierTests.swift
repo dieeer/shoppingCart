@@ -8,7 +8,7 @@
 import XCTest
 @testable import shoppingCart
 
-class ShoppingCartSpy: ShoppingCart {
+final class ShoppingCartSpy: ShoppingCart {
     var addCalled = false
     var removeItemCalled = false
     var clearCartCalled = false
@@ -26,7 +26,7 @@ class ShoppingCartSpy: ShoppingCart {
     }
 }
 
-class DiscounterSpy: Discounting {
+final class DiscounterSpy: Discounting {
     var applyDiscountToCartCalled = false
     var applyDiscountToProductCalled = false
     var applyBuyTwoGetOneFreeCalled = false
@@ -49,7 +49,7 @@ class DiscounterSpy: Discounting {
     }
 }
 
-class CashierTests: XCTestCase {
+final class CashierTests: XCTestCase {
     var cart: ShoppingCartSpy!
     var discounter: DiscounterSpy!
     var cashier: Cashier!
@@ -61,19 +61,26 @@ class CashierTests: XCTestCase {
         cashier = Cashier(cart: cart, discounter: discounter)
     }
     
-    func testApplyDiscountToCart() {
+    override func tearDown() {
+        cart = nil
+        discounter = nil
+        cashier = nil
+        super.tearDown()
+    }
+    
+    func testApplyDiscountToCartIsCalled() {
         cashier.applyDiscountToCart(discount: 10)
         XCTAssertTrue(discounter.applyDiscountToCartCalled)
     }
     
-    func testApplyDiscountToProduct() {
+    func testApplyDiscountToProductIsCalled() {
         let product = Product(id: "001", category: .suspension, name: "Shock Absorber", SKU: "S123", price: Decimal(150.00))
         cart.products = [product]
         cashier.applyDiscountToProduct(productId: "001", discount: 20)
         XCTAssertTrue(discounter.applyDiscountToProductCalled)
     }
     
-    func testApplyBuyTwoGetOneFree() {
+    func testApplyBuyTwoGetOneFreeIsCalled() {
         let product1 = Product(id: "001", category: .suspension, name: "Shock Absorber", SKU: "S123", price: Decimal(150.00))
         let product2 = Product(id: "002", category: .suspension, name: "Strut", SKU: "S124", price: Decimal(80.00))
         let product3 = Product(id: "003", category: .suspension, name: "Coil Spring", SKU: "S125", price: Decimal(120.00))
@@ -84,7 +91,7 @@ class CashierTests: XCTestCase {
         XCTAssertTrue(discounter.applyBuyTwoGetOneFreeCalled)
     }
     
-    func testApplyComboDeal() {
+    func testApplyComboDealIsCalled() {
         let product1 = Product(id: "001", category: .suspension, name: "Shock Absorber", SKU: "S123", price: Decimal(150.00))
         let product2 = Product(id: "002", category: .exhaust, name: "Exhaust Pipe", SKU: "E456", price: Decimal(80.00))
         cart.products = [product1, product2]
@@ -93,5 +100,21 @@ class CashierTests: XCTestCase {
         cashier.applyComboDeal(promotion: promotion)
         
         XCTAssertTrue(discounter.applyComboDealCalled)
+    }
+    
+    func testShowCartReturnsCorrectly() {
+        cart.products = [
+            Product(id: "001", category: .suspension, name: "Shock Absorber", SKU: "S123", price: Decimal(150.00)),
+            Product(id: "002", category: .exhaust, name: "Exhaust Pipe", SKU: "E456", price: Decimal(80.00)),
+            Product(id: "003", category: .suspension, name: "Spring", SKU: "S789", price: Decimal(70.00))
+        ]
+        
+        let expected: [String: Decimal] = [
+            "Shock Absorber": Decimal(150.00),
+            "Exhaust Pipe": Decimal(80.00),
+            "Spring": Decimal(70.00)
+        ]
+        
+        XCTAssertEqual(cashier.showCart(), expected)
     }
 }

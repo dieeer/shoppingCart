@@ -15,7 +15,6 @@ final class DiscounterTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        
         cart = ShoppingCart()
         discounter = Discounter()
     }
@@ -52,7 +51,7 @@ final class DiscounterTests: XCTestCase {
         let product = Product(id: "006", category: .interior, name: "Seat Cover", SKU: "I123", price: Decimal(60.00))
         discounter.apply(discount: 15, toProduct: product)
 
-        XCTAssertEqual(product.price, Decimal(51.00)) // 60 - 15%
+        XCTAssertEqual(product.price, Decimal(51.00)) 
     }
 
     func testDiscountAppliedOncePerProduct() {
@@ -81,7 +80,7 @@ final class DiscounterTests: XCTestCase {
 
         XCTAssertEqual(cart.products.first(where: { $0.id == "001" })?.price, Decimal(150.00))
         XCTAssertEqual(cart.products.first(where: { $0.id == "002" })?.price, Decimal(70.00))
-        XCTAssertEqual(cart.products.first(where: { $0.id == "003" })?.price, Decimal(0.00))   // Free
+        XCTAssertEqual(cart.products.first(where: { $0.id == "003" })?.price, Decimal(0.00)) // free item
         XCTAssertEqual(cart.products.first(where: { $0.id == "004" })?.price, Decimal(40.00))
     }
 
