@@ -15,11 +15,20 @@ protocol Discounting {
 }
 
 struct Discounter: Discounting {
-    
     func apply(discount: Int, to cart: ShoppingCart) {
-        guard cart.products.isEmpty else {
-            return
-        }
         
     }
+    
+    func apply(discount: Int, to product: Product) {
+        
+    }
+    
+    func applyBuyTwoGetOneFree(to cart: ShoppingCart, to category: Category) {
+        
+    }
+    
+    func applyComboDeal(to cart: ShoppingCart, for promotion: Promotion) {
+        
+    }
+
 }
