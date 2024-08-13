@@ -22,6 +22,7 @@ class ShoppingCart: ShoppingCarting {
     
     init(discounter: Discounting? = nil, products: [Product] = []) {
         self.discounter = discounter
+        self.products = products
     }
     
     var totalPrice: Decimal {
