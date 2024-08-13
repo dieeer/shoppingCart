@@ -7,19 +7,15 @@
 
 import Foundation
 
-protocol ShoppingCarting {
-    var products: [Product] { get set }
-}
-
-class ShoppingCart: ShoppingCarting {
-
+class ShoppingCart {
+    
     var products: [Product] = []
     
     init(products: [Product] = []) {
         self.products = products
     }
     
-    var totalPrice: Decimal {
+    func totalPrice() -> Decimal {
         return products.reduce(0) { $0 + $1.price }
     }
     

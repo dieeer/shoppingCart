@@ -30,14 +30,14 @@ class ShoppingCartTests: XCTestCase {
     }
     
     
-    func testAddItemAddsItemSuccessfully() {
+    func testAddItemAddsItem() {
                 
         shoppingCart.add(item: .mockProduct1)
         
         XCTAssertEqual(shoppingCart.products.count, 1)
     }
     
-    func testRemoveItemRemovesItemSuccessfully() {
+    func testRemoveItemRemovesItem() {
         
         addMockProducts()
         
@@ -47,12 +47,19 @@ class ShoppingCartTests: XCTestCase {
         XCTAssertEqual(shoppingCart.products.count, 4)
     }
     
-    func testClearCartClearsTheCartSuccessfully() {
+    func testClearCartClearsTheCart() {
         
         addMockProducts()
         
         shoppingCart.clearCart()
         
         XCTAssertEqual(shoppingCart.products.count, 0)
+    }
+    
+    func testTotalPriceDisplaysCorrectly() {
+        
+        addMockProducts()
+        
+        XCTAssertEqual(shoppingCart.totalPrice(), 1059.95)
     }
 }

@@ -8,30 +8,28 @@
 import Foundation
 
 protocol Discounting {
-    func apply(discount: Int, to cart: ShoppingCart)
-    func apply(discount: Int, to product: Product)
+    func apply(discount: Decimal, toCart: ShoppingCart)
+    func apply(discount: Decimal, toProduct: Product)
     func applyBuyTwoGetOneFree(to cart: ShoppingCart, for category: Category)
     func applyComboDeal(to cart: ShoppingCart, for promotion: Promotion)
 }
 
 struct Discounter: Discounting {
     
-    func apply(discount: Int, to cart: ShoppingCart) {
-        let discountDecimal = Decimal(discount) / 100
+    func apply(discount: Decimal, toCart cart: ShoppingCart) {
         for product in cart.products {
             if !product.discountApplied {
                 let originalPrice = product.price
-                product.price = originalPrice * (1 - discountDecimal)
+                product.price = originalPrice * (1 - discount / 100)
                 product.discountApplied = true
             }
         }
     }
     
-    func apply(discount: Int, to product: Product) {
+    func apply(discount: Decimal, toProduct product: Product) {
         if !product.discountApplied {
-            let discountDecimal = Decimal(discount) / 100
             let originalPrice = product.price
-            product.price = originalPrice * (1 - discountDecimal)
+            product.price = originalPrice * (1 - discount / 100)
             product.discountApplied = true
         }
     }
@@ -44,7 +42,7 @@ struct Discounter: Discounting {
             for i in stride(from: 2, to: totalItems, by: 3) {
                 if let index = cart.products.firstIndex(where: { $0.id == sortedProducts[i].id }) {
                     if !cart.products[index].discountApplied {
-                        cart.products[index].price = Decimal(0.00) // sets every third item in category free
+                        cart.products[index].price = 0.00 // sets every third item in category free
                         cart.products[index].discountApplied = true
                     }
                 }
