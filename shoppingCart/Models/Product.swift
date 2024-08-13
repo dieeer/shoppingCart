@@ -15,12 +15,12 @@ enum Category {
 }
 
 class Product {
-    
     let id: String
     let category: Category
     let name: String
     let SKU: String
-    let price: Decimal
+    var price: Decimal
+    var discountApplied: Bool = false 
     
     init(id: String, category: Category, name: String, SKU: String, price: Decimal) {
         self.id = id
@@ -34,5 +34,5 @@ class Product {
 struct Promotion {
     let name: String
     let requiredItems: [Product]
-    let discount: Int
+    let setPrice: Decimal
 }
